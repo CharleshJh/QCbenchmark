@@ -1,7 +1,7 @@
 // mermin inequality (c)
 // Circuit optimization for IBM processors
 // arXiv:1812.11602v1 pg. 4
-// This file have been taken from https://github.com/jwoehr/qis_job
+// This file has been taken from https://github.com/jwoehr/qis_job
 OPENQASM 2.0;
 include "qelib1.inc";
 qreg q[3];

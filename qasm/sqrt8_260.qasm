@@ -1,3 +1,4 @@
+// This file has been taken from https://github.com/iic-jku/ibm_qx_mapping
 OPENQASM 2.0;
 include "qelib1.inc";
 qreg q[16];

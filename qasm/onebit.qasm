@@ -1,4 +1,4 @@
-// This file have been taken from https://github.com/jwoehr/qis_job
+// This file has been taken from https://github.com/jwoehr/qis_job
 OPENQASM 2.0;
 include "qelib1.inc";
 qreg q[1];
