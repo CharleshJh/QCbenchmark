@@ -129,7 +129,7 @@ int main(int argc, char* argv[]) {
     genFile(qbits, 1, argv[3]);
 
 #ifdef DEBUG
-  cout << "sucess" << endl;
+  cout << "end" << endl;
 #endif
 
   return 0;
