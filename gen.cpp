@@ -15,13 +15,15 @@ using namespace std;
 #define DEBUG
 
 void help_message() {
-  cout << "usage: generator_name [ -E | -Q ] [ int number ] <output_file>" << endl
-    << "-E means entangle, -Q means QFT" << endl;
+  cout << "usage: generator_name [ -E | -fQ | -rQ ] [ int number ] <output_file>" << endl
+    << "-E  means entangle" << endl
+    << "-fQ means fake QFT" << endl
+    << "-rQ means real QFT" << endl;
 }
 
 bool myStr2Int(const string& str, int& num) {
 
-#ifdef DEBUG
+#ifdef DEBUG1
   cout << "str2int called" << endl;
 #endif
 
@@ -42,9 +44,20 @@ bool myStr2Int(const string& str, int& num) {
   return valid;
 }
 
+int myPow(const int& x, const int& p) {
+  if (p == 0) return 1;
+  if (p == 1) return x;
+
+  int tmp = myPow(x, p/2);
+  if (p%2 == 0)
+    return tmp * tmp;
+  else
+    return x * tmp * tmp;
+}
+
 void genFile(const int& qbits, const int& format, const string& fileName) {
 
-  cout << "generating file..." << endl;
+  cout << "genFile() is called..." << endl;
 
   fstream file;
   file.open(fileName, ios::out);
@@ -79,21 +92,32 @@ void genFile(const int& qbits, const int& format, const string& fileName) {
   }
   file << endl << ".begin" << endl;
 
-  // QFT
+
+  // entangle
   if (format == 0) {
+    file << "h1 q0" << endl;
+    for (int i = 1; i < qbits; ++i) {
+      file << "t2 q0 q" << i << endl;
+    }
+  }
+
+  // fake QFT
+  else if (format == 1) {
     for (int i = 0; i < qbits; ++i) {
       file << "h1 q" << i << endl;
       for (int j = i + 1; j < qbits; ++j) {
-        file << "z2 q" << j << " q" << i << endl;
+        file << "q2:4 q" << j << " q" << i << endl;
       }
     }
   }
 
-  // entangle
-  else if (format == 1) {
-    file << "h1 q0" << endl;
-    for (int i = 1; i < qbits; ++i) {
-      file << "t2 q0 q" << i << endl;
+  // real QFT
+  else if (format == 2) {
+    for (int i = 0; i < qbits; ++i) {
+      file << "h1 q" << i << endl;
+      for (int j = 1, k = (qbits - i); j < k; ++j) {
+        file << "q2:" << myPow(2, j) << " q" << (i + j) << " q" << i << endl;
+      }
     }
   }
 
@@ -104,7 +128,7 @@ void genFile(const int& qbits, const int& format, const string& fileName) {
 
 int main(int argc, char* argv[]) {
 
-  if (argc == 0 || strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "-help") == 0) {
+  if (argc == 1 || strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "-help") == 0) {
     help_message();
     return 0;
   }
@@ -123,10 +147,12 @@ int main(int argc, char* argv[]) {
   cout << "running..." << endl;
 #endif
 
-  if (strcmp(argv[1],"-Q") == 0)
+  if (strcmp(argv[1],"-E") == 0)
     genFile(qbits, 0, argv[3]);
-  else if (strcmp(argv[1],"-E") == 0)
+  else if (strcmp(argv[1],"-fQ") == 0)
     genFile(qbits, 1, argv[3]);
+  else if (strcmp(argv[1], "-rQ") == 0)
+    genFile(qbits, 2, argv[3]);
 
 #ifdef DEBUG
   cout << "end" << endl;
