@@ -154,7 +154,7 @@ int main(int argc, char* argv[]) {
   else if (strcmp(argv[1], "-rQ") == 0)
     genFile(qbits, 2, argv[3]);
   else
-    cout << "command maybe typo"
+    cout << "Maybe command typo" << endl;
 
 #ifdef DEBUG1
   cout << "end" << endl;
