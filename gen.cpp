@@ -143,7 +143,7 @@ int main(int argc, char* argv[]) {
     return 0;
   }
 
-#ifdef DEBUG
+#ifdef DEBUG1
   cout << "running..." << endl;
 #endif
 
@@ -153,8 +153,10 @@ int main(int argc, char* argv[]) {
     genFile(qbits, 1, argv[3]);
   else if (strcmp(argv[1], "-rQ") == 0)
     genFile(qbits, 2, argv[3]);
+  else
+    cout << "command maybe typo"
 
-#ifdef DEBUG
+#ifdef DEBUG1
   cout << "end" << endl;
 #endif
 
