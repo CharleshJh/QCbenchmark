@@ -1,5 +1,5 @@
 /**************************************************************************
-  File       [main.cpp]
+  File       [gen.cpp]
   Synopsis   [Entanglement & fake QFT]
   Author     [Chilsan Zhang]
   Modify     [2020/02/27]
@@ -17,8 +17,9 @@ using namespace std;
 void help_message() {
   cout << "usage: generator_name [ -E | -fQ | -rQ ] [ int number ] <output_file>" << endl
     << "-E  means entangle" << endl
-    << "-fQ means fake QFT" << endl
-    << "-rQ means real QFT" << endl;
+    << "-fQ means fake     QFT" << endl
+    << "-rQ means real     QFT" << endl
+    << "-cQ means clifford QFT" << endl;
 }
 
 bool myStr2Int(const string& str, int& num) {
@@ -55,6 +56,960 @@ int myPow(const int& x, const int& p) {
     return x * tmp * tmp;
 }
 
+void appro100(const int num, const int qb, fstream& file) {
+  switch (num) {
+    case 0:
+      break;
+    case 1:
+      file << "s1 q" << qb << endl;
+      break;
+    case 2:
+      file << "q1:4 q" << qb << endl;
+      break;
+    case 3:
+      file << "h1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << endl;
+      break;
+    case 4:
+      file << "s1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << endl;
+      break;
+    case 5:
+      file << "s1 q" << qb << "\nh1 q" << qb << "\ns1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb  << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << endl;
+      break;
+    case 6:
+      file << "q1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
+        << "\nz1 q" << qb << "\nh1 q" << qb << endl;
+      break;
+    case 7:
+      file << "h1 q" << qb << "\ns1 q" << qb << "\nx1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\ns1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << endl;
+      break;
+    case 8:
+      file << "h1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << endl;
+      break;
+    case 9:
+      file << "z1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << endl;
+      break;
+    case 10:
+      file << "q1:-2 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\ns1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << endl;
+      break;
+    case 11:
+      file << "h1 q" << qb << "\ns1 q" << qb << "\nx1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\ns1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << endl;
+      break;
+    case 12:
+      file << "x1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-2 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb 
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb 
+        << endl;
+      break;
+    case 13:
+      file << "q1:-2 q" << qb << "\nh1 q" << qb << "\ns1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << endl;
+      break;
+    case 14:
+      file << "h1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\ns1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << endl;
+      break;
+    case 15:
+      file << "h1 q" << qb << "\nq1:-2 q" << qb << "\nx1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\ns1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << endl;
+      break;
+    case 16:
+      file << "h1 q" << qb << "\nq1:-2 q" << qb << "\nx1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\ns1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << endl;
+      break;
+    case 17:
+      file << "s1 q" << qb << "\nh1 q" << qb << "\nq1:-2 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << endl;
+      break;
+    case 18:
+      file << "z1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\ns1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\ns1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << endl;
+      break;
+    case 19:
+      file << "q1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
+        "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nz1 q" << qb << endl;
+      break;
+    default:
+      break;
+  }
+}
+
+void approInv100(const int num, const int qb, fstream& file) {
+  switch (num) {
+    case 0:
+      break;
+    case 1:
+      file << "q1:-2 q" << qb << endl;
+      break;
+    case 2:
+      file << "q1:-4 q" << qb << endl;
+      break;
+    case 3:
+      file << "h1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << endl;
+      break;
+    case 4:
+      file << "h1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-2 q" << qb << endl;
+      break;
+    case 5:
+      file << "h1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nq1:-2 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-2 q" << qb << endl;
+      break;
+    case 6:
+      file << "h1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << endl;
+      break;
+    case 7:
+      file << "q1:-2 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nq1:-2 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nx1 q" << qb << "\nq1:-2 q" << qb << "\nh1 q" << qb
+        << endl;
+      break;
+    case 8:
+      file << "q1:-2 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << endl;
+      break;
+    case 9:
+      file << "z1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << endl;
+      break;
+    case 10:
+      file << "h1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nq1:-2 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nz1 q" << qb << "\nh1 q" << qb << "\ns1 q" << qb << endl;
+      break;
+    case 11:
+      file << "q1:-2 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nq1:-2 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nx1 q" << qb << "\nq1:-2 q" << qb << "\nh1 q" << qb << endl;
+      break;
+    case 12:
+      file << "q1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\ns1 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nx1 q" << qb << endl;
+      break;
+    case 13:
+      file << "z1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nq1:-2 q" << qb << "\nh1 q" << qb << "\ns1 q" << qb << endl;
+      break;
+    case 14:
+      file << "q1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nq1:-2 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
+        << "\nz1 q" << qb << "\nh1 q" << qb << endl;
+      break;
+    case 15:
+      file << "z1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb 
+        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
+        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
+        << "\nq1:-2 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nx1 q" << qb << "\ns1 q" << qb
+        << "\nh1 q" << qb << endl;
+      break;
+    case 16:
+      file << "q1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
+        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nq1:-2 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nx1 q" << qb << "\ns1 q" << qb << 
+        "\nh1 q" << qb << endl;
+      break;
+    case 17:
+      file << "z1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\ns1 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-2 q" << qb << endl;
+      break;
+    case 18:
+      file << "q1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
+        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nq1:-2 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nq1:-2 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nz1 q" << qb << endl;
+      break;
+    case 19:
+      file << "z1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
+        "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
+        "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << 
+        "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
+        "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << endl;
+      break;
+    default:
+      break;
+
+
+  }
+}
 void genFile(const int& qbits, const int& format, const string& fileName) {
 
   cout << "genFile() is called..." << endl;
@@ -121,6 +1076,19 @@ void genFile(const int& qbits, const int& format, const string& fileName) {
     }
   }
 
+  else if (format == 3) {
+    for (int i = 0; i < qbits; ++i) {
+      file << "h1 q" << i << endl;
+      for (int j = 1, k = (qbits - i); j < k; ++j) {
+        appro100(j + 1, i + j, file);
+        file << "x2 q" << (i + j) << " q" << i << endl;
+        approInv100(j + 1, i, file);
+        file << "x2 q" << (i + j) << " q" << i << endl;
+        appro100(j + 1, i, file);
+      }
+    }
+  }
+
   file << ".end";
 
   file.close();
@@ -153,6 +1121,8 @@ int main(int argc, char* argv[]) {
     genFile(qbits, 1, argv[3]);
   else if (strcmp(argv[1], "-rQ") == 0)
     genFile(qbits, 2, argv[3]);
+  else if (strcmp(argv[1], "-cQ") == 0)
+    genFile(qbits, 3, argv[3]);
   else
     cout << "Maybe command typo" << endl;
 
