@@ -67,31 +67,6 @@ void appro100(const int num, const int qb, fstream& file) {
       file << "q1:4 q" << qb << endl;
       break;
     case 3:
-      file << "h1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
-        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
-        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
-        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
-        << "\nh1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
-        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
-        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
-        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
-        << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
-        << "\nq1:4 q" << qb << "\nh1 q" << qb << endl;
-      break;
-    case 4:
-      file << "s1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
-        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
-        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
-        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
-        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
-        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
-        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb 
-        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
-        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
-        << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
-        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << endl;
-      break;
-    case 5:
       file << "s1 q" << qb << "\nh1 q" << qb << "\ns1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
         << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
         << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
@@ -104,7 +79,7 @@ void appro100(const int num, const int qb, fstream& file) {
         << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
         << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << endl;
       break;
-    case 6:
+    case 4:
       file << "q1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
         << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
         << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
@@ -122,7 +97,7 @@ void appro100(const int num, const int qb, fstream& file) {
         << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
         << "\nz1 q" << qb << "\nh1 q" << qb << endl;
       break;
-    case 7:
+    case 5:
       file << "h1 q" << qb << "\ns1 q" << qb << "\nx1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
         << "\ns1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
         << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
@@ -142,7 +117,7 @@ void appro100(const int num, const int qb, fstream& file) {
         << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
         << "\nh1 q" << qb << endl;
       break;
-    case 8:
+    case 6:
       file << "h1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
         << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
         << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
@@ -163,7 +138,7 @@ void appro100(const int num, const int qb, fstream& file) {
         << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
         << "\nq1:4 q" << qb << "\nh1 q" << qb << endl;
       break;
-    case 9:
+    case 7:
       file << "z1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
         << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
         << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
@@ -186,7 +161,7 @@ void appro100(const int num, const int qb, fstream& file) {
         << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
         << "\nq1:-4 q" << qb << "\nz1 q" << qb << endl;
       break;
-    case 10:
+    case 8:
       file << "q1:-2 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
         << "\nh1 q" << qb << "\ns1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
         << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
@@ -211,7 +186,7 @@ void appro100(const int num, const int qb, fstream& file) {
         << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
         << "\nq1:4 q" << qb << "\nh1 q" << qb << endl;
       break;
-    case 11:
+    case 9:
       file << "h1 q" << qb << "\ns1 q" << qb << "\nx1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
         << "\ns1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
         << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
@@ -239,7 +214,7 @@ void appro100(const int num, const int qb, fstream& file) {
         << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
         << "\nh1 q" << qb << endl;
       break;
-    case 12:
+    case 10:
       file << "x1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-2 q" << qb 
         << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
         << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
@@ -267,7 +242,7 @@ void appro100(const int num, const int qb, fstream& file) {
         << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb 
         << endl;
       break;
-    case 13:
+    case 11:
       file << "q1:-2 q" << qb << "\nh1 q" << qb << "\ns1 q" << qb << "\nq1:4 q" << qb 
         << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
         << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
@@ -294,7 +269,7 @@ void appro100(const int num, const int qb, fstream& file) {
         << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb
         << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << endl;
       break;
-    case 14:
+    case 12:
       file << "h1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\ns1 q" << qb
         << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
         << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
@@ -324,7 +299,7 @@ void appro100(const int num, const int qb, fstream& file) {
         << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
         << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << endl;
       break;
-    case 15:
+    case 13:
       file << "h1 q" << qb << "\nq1:-2 q" << qb << "\nx1 q" << qb << "\nq1:4 q" << qb 
         << "\nh1 q" << qb << "\ns1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
         << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
@@ -358,7 +333,7 @@ void appro100(const int num, const int qb, fstream& file) {
         << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb
         << "\nq1:-4 q" << qb << "\nz1 q" << qb << endl;
       break;
-    case 16:
+    case 14:
       file << "h1 q" << qb << "\nq1:-2 q" << qb << "\nx1 q" << qb << "\nq1:4 q" << qb 
         << "\nh1 q" << qb << "\ns1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb
         << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
@@ -395,7 +370,7 @@ void appro100(const int num, const int qb, fstream& file) {
         "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
         "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << endl;
       break;
-    case 17:
+    case 15:
       file << "s1 q" << qb << "\nh1 q" << qb << "\nq1:-2 q" << qb << "\nq1:4 q" << qb
         << "\nh1 q" << qb << 
         "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
@@ -435,7 +410,7 @@ void appro100(const int num, const int qb, fstream& file) {
         "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
         "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << endl;
       break;
-    case 18:
+    case 16:
       file << "z1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\ns1 q" << qb << "\nq1:4 q" << qb << 
         "\nh1 q" << qb << "\ns1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
         "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << 
@@ -483,7 +458,7 @@ void appro100(const int num, const int qb, fstream& file) {
         "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
         "\nz1 q" << qb << "\nh1 q" << qb << endl;
       break;
-    case 19:
+    case 17:
       file << "q1:4 q" << qb << "\nh1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
         "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << 
         "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
@@ -547,32 +522,6 @@ void approInv100(const int num, const int qb, fstream& file) {
       file << "q1:-4 q" << qb << endl;
       break;
     case 3:
-      file << "h1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
-        << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
-        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
-        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
-        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
-        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
-        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
-        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
-        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
-        << "\nq1:-4 q" << qb << "\nz1 q" << qb << "\nh1 q" << qb << endl;
-      break;
-    case 4:
-      file << "h1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
-        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
-        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
-        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
-        << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
-        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
-        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
-        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
-        << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
-        << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
-        << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
-        << "\nq1:-2 q" << qb << endl;
-      break;
-    case 5:
       file << "h1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
         << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
         << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
@@ -586,7 +535,7 @@ void approInv100(const int num, const int qb, fstream& file) {
         << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nq1:-2 q" << qb << "\nh1 q" << qb 
         << "\nq1:-2 q" << qb << endl;
       break;
-    case 6:
+    case 4:
       file << "h1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb 
         << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
         << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
@@ -604,7 +553,7 @@ void approInv100(const int num, const int qb, fstream& file) {
         << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
         << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << endl;
       break;
-    case 7:
+    case 5:
       file << "q1:-2 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
         << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
         << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
@@ -625,7 +574,7 @@ void approInv100(const int num, const int qb, fstream& file) {
         << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nx1 q" << qb << "\nq1:-2 q" << qb << "\nh1 q" << qb
         << endl;
       break;
-    case 8:
+    case 6:
       file << "q1:-2 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
         << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
         << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
@@ -646,7 +595,7 @@ void approInv100(const int num, const int qb, fstream& file) {
         << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
         << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << endl;
       break;
-    case 9:
+    case 7:
       file << "z1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
         << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
         << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
@@ -669,7 +618,7 @@ void approInv100(const int num, const int qb, fstream& file) {
         << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
         << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nz1 q" << qb << endl;
       break;
-    case 10:
+    case 8:
       file << "h1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
         << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
         << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
@@ -694,7 +643,7 @@ void approInv100(const int num, const int qb, fstream& file) {
         << "\nq1:-4 q" << qb << "\nq1:-2 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
         << "\nz1 q" << qb << "\nh1 q" << qb << "\ns1 q" << qb << endl;
       break;
-    case 11:
+    case 9:
       file << "q1:-2 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
         << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb 
         << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
@@ -722,7 +671,7 @@ void approInv100(const int num, const int qb, fstream& file) {
         << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nq1:-2 q" << qb << "\nh1 q" << qb 
         << "\nq1:-4 q" << qb << "\nx1 q" << qb << "\nq1:-2 q" << qb << "\nh1 q" << qb << endl;
       break;
-    case 12:
+    case 10:
       file << "q1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
         << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb
         << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb 
@@ -751,7 +700,7 @@ void approInv100(const int num, const int qb, fstream& file) {
         << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\ns1 q" << qb << "\nh1 q" << qb
         << "\nq1:-4 q" << qb << "\nx1 q" << qb << endl;
       break;
-    case 13:
+    case 11:
       file << "z1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
         << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
         << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
@@ -778,7 +727,7 @@ void approInv100(const int num, const int qb, fstream& file) {
         << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
         << "\nq1:-4 q" << qb << "\nq1:-2 q" << qb << "\nh1 q" << qb << "\ns1 q" << qb << endl;
       break;
-    case 14:
+    case 12:
       file << "q1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb 
         << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
         << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb
@@ -810,7 +759,7 @@ void approInv100(const int num, const int qb, fstream& file) {
         << "\nq1:-4 q" << qb << "\nq1:-2 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb 
         << "\nz1 q" << qb << "\nh1 q" << qb << endl;
       break;
-    case 15:
+    case 13:
       file << "z1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
         << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
         << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb
@@ -845,7 +794,7 @@ void approInv100(const int num, const int qb, fstream& file) {
         << "\nq1:-2 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nx1 q" << qb << "\ns1 q" << qb
         << "\nh1 q" << qb << endl;
       break;
-    case 16:
+    case 14:
       file << "q1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb
         << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << 
         "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
@@ -879,7 +828,7 @@ void approInv100(const int num, const int qb, fstream& file) {
         "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nx1 q" << qb << "\ns1 q" << qb << 
         "\nh1 q" << qb << endl;
       break;
-    case 17:
+    case 15:
       file << "z1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
         "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
         "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << 
@@ -917,7 +866,7 @@ void approInv100(const int num, const int qb, fstream& file) {
         "\nh1 q" << qb << "\nq1:-4 q" << qb << "\ns1 q" << qb << "\nh1 q" << qb << 
         "\nq1:-2 q" << qb << endl;
       break;
-    case 18:
+    case 16:
       file << "q1:-4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb
         << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << 
         "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
@@ -961,7 +910,7 @@ void approInv100(const int num, const int qb, fstream& file) {
         "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nq1:-2 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
         "\nz1 q" << qb << endl;
       break;
-    case 19:
+    case 17:
       file << "z1 q" << qb << "\nq1:4 q" << qb << 
         "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << "\nh1 q" << qb << 
         "\nz1 q" << qb << "\nq1:4 q" << qb << "\nh1 q" << qb << "\nq1:-4 q" << qb << 
@@ -1121,8 +1070,13 @@ int main(int argc, char* argv[]) {
     genFile(qbits, 1, argv[3]);
   else if (strcmp(argv[1], "-rQ") == 0)
     genFile(qbits, 2, argv[3]);
-  else if (strcmp(argv[1], "-cQ") == 0)
+  else if (strcmp(argv[1], "-cQ") == 0) {
+    if (qbits > 16) {
+      cout << "Can't generate > 16 qbits" << endl;
+      return 0;
+    }
     genFile(qbits, 3, argv[3]);
+  }
   else
     cout << "Maybe command typo" << endl;
 
