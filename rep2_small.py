@@ -48,7 +48,7 @@ for f in inDir:
                     writingFile.write('.begin\n')
                 else:
                     aLine = fileLines[f1].split()
-                    if (int(aLine[0]) < layers or layers == 0):
+                    if (int(aLine[0]) < layers or layers == 0 or int(aLine[0]) == 10):
                         if aLine[1] == 'h' or aLine[1] == 'z':
                             writingFile.write(aLine[1] + '1 q' + aLine[2] + '\n')
                         elif aLine[1] == 'cz':
