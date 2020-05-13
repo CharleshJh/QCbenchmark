@@ -23,6 +23,8 @@ for f in inDir:
         splitPath[tmpNum - 1] = 'out'
         path = '/'.join(splitPath)
         path = path.replace('.txt', '.real')
+        
+        if
 
         with open(path, 'w') as writingFile:
             for f1 in range(len(fileLines)):
