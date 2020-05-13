@@ -28,12 +28,12 @@ for f in inDir:
             for f1 in range(len(fileLines)):
                 if f1 == 0:
                     writingFile.write('.version 1.0\n')
-                    writingFile.write('.numvar '+ fileLines[f1])
+                    writingFile.write('.numvars '+ fileLines[f1])
                     varLine = ".variables"
                     for x in range(int(fileLines[f1])):
                         varLine = varLine + " q" + str(x)
                     writingFile.write(varLine + '\n')
-                    varLine = ".constant "
+                    varLine = ".constants "
                     for x in range(int(fileLines[f1])):
                         varLine = varLine + "0"
                     writingFile.write(varLine + '\n')
@@ -49,7 +49,7 @@ for f in inDir:
                     elif aLine[1] == 'cz':
                         writingFile.write('z2 q' + aLine[2] + ' q' + aLine[3] + '\n')
                     elif aLine[1] == 'x_1_2':
-                        writingFile.write('x1 q' + aLine[2] + '\n')
+                        writingFile.write('t1 q' + aLine[2] + '\n')
                     elif aLine[1] == 'y_1_2':
                         writingFile.write('y1 q' + aLine[2] + '\n')
                     elif aLine[1] == 't':
