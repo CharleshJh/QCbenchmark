@@ -23,13 +23,11 @@ for f in inDir:
         splitPath[tmpNum - 1] = 'out'
         path = '/'.join(splitPath)
         path = path.replace('.txt', '.real')
-        print(path + ' ori')
         
         if '_10_' in path:
             for f2 in range(2,11):
                 nameToChange = '_' + str(f2) + '_'
                 newpath = path.replace('_10_', nameToChange)
-                print(newpath + 'change')
                 with open(newpath, 'w') as writingFile:
                     for f1 in range(len(fileLines)):
                         if f1 == 0:
