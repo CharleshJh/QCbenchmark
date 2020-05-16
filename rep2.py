@@ -48,7 +48,7 @@ for f in inDir:
                             writingFile.write('.begin\n')
                         else:
                             aLine = fileLines[f1].split()
-                            if int(aLine[0]) <= f2: #or int(aLine[0]) == 10:
+                            if int(aLine[0]) < f2: #or int(aLine[0]) == 10:
                                 if aLine[1] == 'h' or aLine[1] == 'z':
                                     writingFile.write(aLine[1] + '1 q' + aLine[2] + '\n')
                                 elif aLine[1] == 'cz':
@@ -65,6 +65,7 @@ for f in inDir:
 
         else:
             with open(path, 'w') as writingFile:
+                numLines = int(fileLines[-1].split()[0])
                 for f1 in range(len(fileLines)):
                     if f1 == 0:
                         writingFile.write('.version 1.0\n')
@@ -82,7 +83,7 @@ for f in inDir:
                             varLine = varLine + "-"
                         writingFile.write(varLine + '\n')
                         writingFile.write('.begin\n')
-                    else:
+                    elif not int(fileLines[f1].split()[0]) == numLines:
                         aLine = fileLines[f1].split()
                         if aLine[1] == 'h' or aLine[1] == 'z':
                             writingFile.write(aLine[1] + '1 q' + aLine[2] + '\n')
