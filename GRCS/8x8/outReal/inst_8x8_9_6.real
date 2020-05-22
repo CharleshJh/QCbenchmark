@@ -1,0 +1,419 @@
+.version 1.0
+.numvars 64
+.variables q0 q1 q2 q3 q4 q5 q6 q7 q8 q9 q10 q11 q12 q13 q14 q15 q16 q17 q18 q19 q20 q21 q22 q23 q24 q25 q26 q27 q28 q29 q30 q31 q32 q33 q34 q35 q36 q37 q38 q39 q40 q41 q42 q43 q44 q45 q46 q47 q48 q49 q50 q51 q52 q53 q54 q55 q56 q57 q58 q59 q60 q61 q62 q63
+.constants 0000000000000000000000000000000000000000000000000000000000000000
+.garbage ----------------------------------------------------------------
+.begin
+h1 q0
+h1 q1
+h1 q2
+h1 q3
+h1 q4
+h1 q5
+h1 q6
+h1 q7
+h1 q8
+h1 q9
+h1 q10
+h1 q11
+h1 q12
+h1 q13
+h1 q14
+h1 q15
+h1 q16
+h1 q17
+h1 q18
+h1 q19
+h1 q20
+h1 q21
+h1 q22
+h1 q23
+h1 q24
+h1 q25
+h1 q26
+h1 q27
+h1 q28
+h1 q29
+h1 q30
+h1 q31
+h1 q32
+h1 q33
+h1 q34
+h1 q35
+h1 q36
+h1 q37
+h1 q38
+h1 q39
+h1 q40
+h1 q41
+h1 q42
+h1 q43
+h1 q44
+h1 q45
+h1 q46
+h1 q47
+h1 q48
+h1 q49
+h1 q50
+h1 q51
+h1 q52
+h1 q53
+h1 q54
+h1 q55
+h1 q56
+h1 q57
+h1 q58
+h1 q59
+h1 q60
+h1 q61
+h1 q62
+h1 q63
+z2 q0 q1
+z2 q4 q5
+z2 q10 q11
+z2 q14 q15
+z2 q16 q17
+z2 q20 q21
+z2 q26 q27
+z2 q30 q31
+z2 q32 q33
+z2 q36 q37
+z2 q42 q43
+z2 q46 q47
+z2 q48 q49
+z2 q52 q53
+z2 q58 q59
+z2 q62 q63
+q1:4 q2
+q1:4 q3
+q1:4 q6
+q1:4 q7
+q1:4 q8
+q1:4 q9
+q1:4 q12
+q1:4 q13
+q1:4 q18
+q1:4 q19
+q1:4 q22
+q1:4 q23
+q1:4 q24
+q1:4 q25
+q1:4 q28
+q1:4 q29
+q1:4 q34
+q1:4 q35
+q1:4 q38
+q1:4 q39
+q1:4 q40
+q1:4 q41
+q1:4 q44
+q1:4 q45
+q1:4 q50
+q1:4 q51
+q1:4 q54
+q1:4 q55
+q1:4 q56
+q1:4 q57
+q1:4 q60
+q1:4 q61
+z2 q8 q16
+z2 q40 q48
+z2 q25 q33
+z2 q10 q18
+z2 q42 q50
+z2 q27 q35
+z2 q12 q20
+z2 q44 q52
+z2 q29 q37
+z2 q14 q22
+z2 q46 q54
+z2 q31 q39
+ry_pi_2 q0
+ry_pi_2 q1
+rx_pi_2 q4
+rx_pi_2 q5
+rx_pi_2 q11
+ry_pi_2 q15
+rx_pi_2 q17
+ry_pi_2 q21
+rx_pi_2 q26
+ry_pi_2 q30
+rx_pi_2 q32
+ry_pi_2 q36
+ry_pi_2 q43
+rx_pi_2 q47
+ry_pi_2 q49
+ry_pi_2 q53
+rx_pi_2 q58
+ry_pi_2 q59
+ry_pi_2 q62
+rx_pi_2 q63
+z2 q1 q2
+z2 q5 q6
+z2 q11 q12
+z2 q17 q18
+z2 q21 q22
+z2 q27 q28
+z2 q33 q34
+z2 q37 q38
+z2 q43 q44
+z2 q49 q50
+z2 q53 q54
+z2 q59 q60
+q1:4 q0
+q1:4 q4
+ry_pi_2 q8
+ry_pi_2 q10
+ry_pi_2 q14
+q1:4 q15
+rx_pi_2 q16
+rx_pi_2 q20
+ry_pi_2 q25
+q1:4 q26
+ry_pi_2 q29
+q1:4 q30
+rx_pi_2 q31
+q1:4 q32
+rx_pi_2 q35
+q1:4 q36
+rx_pi_2 q39
+ry_pi_2 q40
+rx_pi_2 q42
+ry_pi_2 q46
+q1:4 q47
+ry_pi_2 q48
+rx_pi_2 q52
+q1:4 q58
+q1:4 q62
+q1:4 q63
+z2 q0 q8
+z2 q32 q40
+z2 q17 q25
+z2 q49 q57
+z2 q2 q10
+z2 q34 q42
+z2 q19 q27
+z2 q51 q59
+z2 q4 q12
+z2 q36 q44
+z2 q21 q29
+z2 q53 q61
+z2 q6 q14
+z2 q38 q46
+z2 q23 q31
+z2 q55 q63
+ry_pi_2 q1
+rx_pi_2 q5
+ry_pi_2 q11
+q1:4 q16
+ry_pi_2 q18
+q1:4 q20
+ry_pi_2 q22
+ry_pi_2 q28
+ry_pi_2 q33
+q1:4 q35
+ry_pi_2 q37
+q1:4 q39
+ry_pi_2 q43
+q1:4 q48
+rx_pi_2 q50
+q1:4 q52
+rx_pi_2 q54
+ry_pi_2 q60
+z2 q2 q3
+z2 q6 q7
+z2 q8 q9
+z2 q12 q13
+z2 q18 q19
+z2 q22 q23
+z2 q24 q25
+z2 q28 q29
+z2 q34 q35
+z2 q38 q39
+z2 q40 q41
+z2 q44 q45
+z2 q50 q51
+z2 q54 q55
+z2 q56 q57
+z2 q60 q61
+rx_pi_2 q0
+q1:4 q1
+ry_pi_2 q4
+q1:4 q5
+rx_pi_2 q10
+q1:4 q11
+ry_pi_2 q14
+ry_pi_2 q17
+rx_pi_2 q21
+ry_pi_2 q27
+rx_pi_2 q31
+rx_pi_2 q32
+q1:4 q33
+rx_pi_2 q36
+q1:4 q37
+rx_pi_2 q42
+q1:4 q43
+rx_pi_2 q46
+ry_pi_2 q49
+ry_pi_2 q53
+rx_pi_2 q59
+ry_pi_2 q63
+z2 q24 q32
+z2 q9 q17
+z2 q41 q49
+z2 q26 q34
+z2 q11 q19
+z2 q43 q51
+z2 q28 q36
+z2 q13 q21
+z2 q45 q53
+z2 q30 q38
+z2 q15 q23
+z2 q47 q55
+q1:4 q0
+rx_pi_2 q2
+rx_pi_2 q3
+q1:4 q4
+ry_pi_2 q6
+ry_pi_2 q7
+rx_pi_2 q8
+q1:4 q10
+rx_pi_2 q12
+q1:4 q14
+rx_pi_2 q18
+rx_pi_2 q22
+ry_pi_2 q25
+q1:4 q27
+rx_pi_2 q29
+q1:4 q31
+rx_pi_2 q35
+ry_pi_2 q39
+rx_pi_2 q40
+q1:4 q42
+ry_pi_2 q44
+q1:4 q46
+rx_pi_2 q50
+ry_pi_2 q54
+ry_pi_2 q56
+ry_pi_2 q57
+q1:4 q59
+ry_pi_2 q60
+rx_pi_2 q61
+q1:4 q63
+z2 q3 q4
+z2 q9 q10
+z2 q13 q14
+z2 q19 q20
+z2 q25 q26
+z2 q29 q30
+z2 q35 q36
+z2 q41 q42
+z2 q45 q46
+z2 q51 q52
+z2 q57 q58
+z2 q61 q62
+q1:4 q2
+q1:4 q6
+q1:4 q7
+q1:4 q8
+ry_pi_2 q11
+q1:4 q12
+ry_pi_2 q15
+ry_pi_2 q17
+q1:4 q18
+rx_pi_2 q21
+q1:4 q22
+ry_pi_2 q23
+rx_pi_2 q24
+rx_pi_2 q28
+ry_pi_2 q32
+rx_pi_2 q34
+rx_pi_2 q38
+q1:4 q39
+q1:4 q40
+ry_pi_2 q43
+q1:4 q44
+rx_pi_2 q47
+rx_pi_2 q49
+q1:4 q50
+rx_pi_2 q53
+q1:4 q54
+ry_pi_2 q55
+q1:4 q56
+q1:4 q60
+z2 q16 q24
+z2 q48 q56
+z2 q1 q9
+z2 q33 q41
+z2 q18 q26
+z2 q50 q58
+z2 q3 q11
+z2 q35 q43
+z2 q20 q28
+z2 q52 q60
+z2 q5 q13
+z2 q37 q45
+z2 q22 q30
+z2 q54 q62
+z2 q7 q15
+z2 q39 q47
+rx_pi_2 q4
+rx_pi_2 q10
+rx_pi_2 q14
+q1:4 q17
+ry_pi_2 q19
+q1:4 q21
+q1:4 q23
+rx_pi_2 q25
+rx_pi_2 q29
+q1:4 q32
+q1:4 q34
+ry_pi_2 q36
+q1:4 q38
+ry_pi_2 q42
+rx_pi_2 q46
+q1:4 q49
+rx_pi_2 q51
+q1:4 q53
+q1:4 q55
+rx_pi_2 q57
+rx_pi_2 q61
+z2 q0 q1
+z2 q4 q5
+z2 q10 q11
+z2 q14 q15
+z2 q16 q17
+z2 q20 q21
+z2 q26 q27
+z2 q30 q31
+z2 q32 q33
+z2 q36 q37
+z2 q42 q43
+z2 q46 q47
+z2 q48 q49
+z2 q52 q53
+z2 q58 q59
+z2 q62 q63
+rx_pi_2 q3
+rx_pi_2 q7
+ry_pi_2 q9
+rx_pi_2 q13
+ry_pi_2 q18
+q1:4 q19
+ry_pi_2 q22
+ry_pi_2 q24
+q1:4 q25
+rx_pi_2 q28
+q1:4 q29
+ry_pi_2 q35
+rx_pi_2 q39
+rx_pi_2 q41
+rx_pi_2 q45
+ry_pi_2 q50
+q1:4 q51
+ry_pi_2 q54
+rx_pi_2 q56
+q1:4 q57
+rx_pi_2 q60
+q1:4 q61
+.end

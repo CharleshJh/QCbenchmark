@@ -1,0 +1,196 @@
+.version 1.0
+.numvars 36
+.variables q0 q1 q2 q3 q4 q5 q6 q7 q8 q9 q10 q11 q12 q13 q14 q15 q16 q17 q18 q19 q20 q21 q22 q23 q24 q25 q26 q27 q28 q29 q30 q31 q32 q33 q34 q35
+.constants 000000000000000000000000000000000000
+.garbage ------------------------------------
+.begin
+h1 q0
+h1 q1
+h1 q2
+h1 q3
+h1 q4
+h1 q5
+h1 q6
+h1 q7
+h1 q8
+h1 q9
+h1 q10
+h1 q11
+h1 q12
+h1 q13
+h1 q14
+h1 q15
+h1 q16
+h1 q17
+h1 q18
+h1 q19
+h1 q20
+h1 q21
+h1 q22
+h1 q23
+h1 q24
+h1 q25
+h1 q26
+h1 q27
+h1 q28
+h1 q29
+h1 q30
+h1 q31
+h1 q32
+h1 q33
+h1 q34
+h1 q35
+z2 q0 q1
+z2 q4 q5
+z2 q8 q9
+z2 q12 q13
+z2 q16 q17
+z2 q20 q21
+z2 q24 q25
+z2 q28 q29
+z2 q32 q33
+q1:4 q2
+q1:4 q3
+q1:4 q6
+q1:4 q7
+q1:4 q10
+q1:4 q11
+q1:4 q14
+q1:4 q15
+q1:4 q18
+q1:4 q19
+q1:4 q22
+q1:4 q23
+q1:4 q26
+q1:4 q27
+q1:4 q30
+q1:4 q31
+q1:4 q34
+q1:4 q35
+z2 q6 q12
+z2 q19 q25
+z2 q8 q14
+z2 q21 q27
+z2 q10 q16
+z2 q23 q29
+ry_pi_2 q0
+ry_pi_2 q1
+rx_pi_2 q4
+rx_pi_2 q5
+ry_pi_2 q9
+ry_pi_2 q13
+ry_pi_2 q17
+rx_pi_2 q20
+ry_pi_2 q24
+ry_pi_2 q28
+ry_pi_2 q32
+rx_pi_2 q33
+z2 q1 q2
+z2 q9 q10
+z2 q13 q14
+z2 q21 q22
+z2 q25 q26
+z2 q33 q34
+q1:4 q0
+q1:4 q4
+q1:4 q5
+rx_pi_2 q6
+rx_pi_2 q8
+ry_pi_2 q12
+ry_pi_2 q16
+q1:4 q17
+ry_pi_2 q19
+q1:4 q20
+ry_pi_2 q23
+q1:4 q24
+rx_pi_2 q27
+q1:4 q28
+rx_pi_2 q29
+q1:4 q32
+z2 q0 q6
+z2 q24 q30
+z2 q13 q19
+z2 q2 q8
+z2 q26 q32
+z2 q15 q21
+z2 q4 q10
+z2 q28 q34
+z2 q17 q23
+rx_pi_2 q1
+rx_pi_2 q9
+q1:4 q12
+rx_pi_2 q14
+q1:4 q16
+rx_pi_2 q22
+rx_pi_2 q25
+q1:4 q27
+q1:4 q29
+ry_pi_2 q33
+z2 q2 q3
+z2 q6 q7
+z2 q10 q11
+z2 q14 q15
+z2 q18 q19
+z2 q22 q23
+z2 q26 q27
+z2 q30 q31
+z2 q34 q35
+ry_pi_2 q0
+q1:4 q1
+ry_pi_2 q4
+rx_pi_2 q8
+q1:4 q9
+rx_pi_2 q13
+rx_pi_2 q17
+rx_pi_2 q21
+ry_pi_2 q24
+q1:4 q25
+ry_pi_2 q28
+ry_pi_2 q32
+q1:4 q33
+z2 q18 q24
+z2 q7 q13
+z2 q20 q26
+z2 q9 q15
+z2 q22 q28
+z2 q11 q17
+q1:4 q0
+rx_pi_2 q2
+ry_pi_2 q3
+q1:4 q4
+ry_pi_2 q6
+q1:4 q8
+ry_pi_2 q10
+ry_pi_2 q14
+ry_pi_2 q19
+q1:4 q21
+ry_pi_2 q23
+rx_pi_2 q27
+ry_pi_2 q30
+ry_pi_2 q31
+q1:4 q32
+rx_pi_2 q34
+ry_pi_2 q35
+z2 q3 q4
+z2 q7 q8
+z2 q15 q16
+z2 q19 q20
+z2 q27 q28
+z2 q31 q32
+q1:4 q2
+q1:4 q6
+ry_pi_2 q9
+q1:4 q10
+rx_pi_2 q11
+ry_pi_2 q13
+q1:4 q14
+rx_pi_2 q17
+ry_pi_2 q18
+ry_pi_2 q22
+q1:4 q23
+ry_pi_2 q24
+rx_pi_2 q26
+q1:4 q30
+q1:4 q34
+q1:4 q35
+.end
