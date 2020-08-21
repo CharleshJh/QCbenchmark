@@ -1,6 +1,6 @@
 /**************************************************************************
   File       [rep.cpp]
-  Synopsis   [Entanglement & fake QFT]
+  Synopsis   [EevLib benchmark tramsform]
   Author     [Chilsan Zhang]
   Modify     [2020/02/27]
  **************************************************************************/
@@ -9,7 +9,7 @@
 #include <cstring>
 #include <stdlib.h>
 #include <time.h>
-#include <dirent.h>
+#include <filesystem>
 #include <vector>
 
 using namespace std;
@@ -173,16 +173,6 @@ int main(int argc, char* argv[]) {
   cout << "running..." << endl;
 #endif
 
-  DIR *dir;
-  struct dirent *ent;
-  if ((dir = opendir ("./NOT_CNOT_and_Toffoli_gates")) != NULL) {
-    /* print all the files and directories within directory */
-    while ((ent = readdir (dir)) != NULL) {
-      cout << ent->d_name << endl;
-    }
-    closedir (dir);
-  }
-
   if (strcmp(argv[1],"-1") == 0)
     repFile(0, argv[2]);
   else if (strcmp(argv[1],"-2") == 0)
@@ -190,7 +180,7 @@ int main(int argc, char* argv[]) {
   else
     cout << "Maybe command typo" << endl;
 
-#ifdef DEBUG1
+#ifdef DEBUG
   cout << "end" << endl;
 #endif
 
