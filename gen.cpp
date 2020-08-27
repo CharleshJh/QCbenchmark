@@ -1155,7 +1155,7 @@ void genFile(const int& qbits, const int& format, const string& fileName) {
   }
   file << endl << ".constants ";
 
-  if (format == 0) {
+  if (format == 0 || format == 2) {
     srand(time(NULL));
     for (int i = 0; i < qbits; ++i) {
       file << (rand() % 2);
