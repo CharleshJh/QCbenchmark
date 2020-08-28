@@ -62,4 +62,3 @@ for f in inDir:
                 if f1 == len(fileLines) - 1:
                     writingFile.write('.end\n')
             writingFile.close()
-
