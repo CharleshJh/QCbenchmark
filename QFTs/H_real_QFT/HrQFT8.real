@@ -1,6 +1,6 @@
 .numvars 8
 .variables q0 q1 q2 q3 q4 q5 q6 q7
-.constants 
+.constants 00000000
 .garbage --------
 .begin
 h1 q0

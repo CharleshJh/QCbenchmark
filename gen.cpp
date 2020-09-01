@@ -466,7 +466,7 @@ void genFile(const int& qbits, const int& format, const string& fileName) {
       file << (rand() % 2);
     }
   }
-  else if (format == 1) {
+  else if (format == 1 || format == 4) {
     for (int i = 0; i < qbits; ++i) {
       file << 0;
     }
