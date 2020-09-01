@@ -1,7 +1,7 @@
 /**************************************************************************
   File       [gen.cpp]
   Synopsis   [Entanglement & some QFT]
-  Author     [Chilsan Zhang]
+  Author     [Chilsan Jhang]
   Modify     [2020/09/01]
   Note       [The clifford QFT part is generated from "sqct" project]
  **************************************************************************/

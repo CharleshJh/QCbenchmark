@@ -1,3 +1,9 @@
+"""
+File       [real_2_qasm.py]
+Synopsis   [translate .real in a directory to .qasm]
+Author     [Chilsan Jhang]
+Modify     [2020/09/01]
+"""
 import sys
 import os
 from os import listdir
@@ -12,17 +18,18 @@ os.chdir('..')
 
 inDir = listdir(mypath)
 
-for f in inDir:
-  target = join(mypath, f)
+for fname in inDir:
+  target = join(mypath, fname)
 
   if isfile(target):
+    f = open(target, 'r')
     fileLines = f.readlines()
     splitPath = f.name.split('/')
     tmpNum = len(splitPath)
     splitPath.append(splitPath[tmpNum - 1])
     splitPath[tmpNum - 1] = 'out'
     path = '/'.join(splitPath)
-    path = path.replace('.qasm', '.real')
+    path = path.replace('.real', '.qasm')
     
     with open(path, 'w') as writingFile:
       writingFile.write('OPENQASM 2.0;\n')
@@ -38,10 +45,13 @@ for f in inDir:
           qbitList = aLine
           del qbitList[0]
 
+        elif aLine[0] == '.version' or aLine[0] == '.constants' or aLine[0] == '.garbage' or aLine[0] == '.begin' or aLine[0] == '.end':
+          continue
+
         # Hadamard
         elif aLine[0] == 'h1':
           if len(numInLine) == 2:
-            if qbitList[numInLine[1]] == aLine[1]:
+            if qbitList[int(numInLine[1])] == aLine[1]:
               writingFile.write('h q[' + numInLine[1] + '];\n')
             else:
               sys.exit('qbit name error')
@@ -51,7 +61,7 @@ for f in inDir:
         # X
         elif aLine[0] == 't1':
           if len(numInLine) == 2:
-            if qbitList[numInLine[1]] == aLine[1]:
+            if qbitList[int(numInLine[1])] == aLine[1]:
               writingFile.write('x q[' + numInLine[1] + '];\n')
             else:
               sys.exit('qbit name error')
@@ -61,7 +71,7 @@ for f in inDir:
         # Y
         elif aLine[0] == 'y1':
           if len(numInLine) == 2:
-            if qbitList[numInLine[1]] == aLine[1]:
+            if qbitList[int(numInLine[1])] == aLine[1]:
               writingFile.write('y q[' + numInLine[1] + '];\n')
             else:
               sys.exit('qbit name error')
@@ -71,7 +81,7 @@ for f in inDir:
         # Z
         elif aLine[0] == 'z1':
           if len(numInLine) == 2:
-            if qbitList[numInLine[1]] == aLine[1]:
+            if qbitList[int(numInLine[1])] == aLine[1]:
               writingFile.write('z q[' + numInLine[1] + '];\n')
             else:
               sys.exit('qbit name error')
@@ -81,7 +91,7 @@ for f in inDir:
         # S
         elif aLine[0] == 's1':
           if len(numInLine) == 2:
-            if qbitList[numInLine[1]] == aLine[1]:
+            if qbitList[int(numInLine[1])] == aLine[1]:
               writingFile.write('s q[' + numInLine[1] + '];\n')
             else:
               sys.exit('qbit name error')
@@ -91,7 +101,7 @@ for f in inDir:
         # Sdg
         elif aLine[0] == 'q1:-2':
           if len(numInLine) == 3:
-            if qbitList[numInLine[2]] == aLine[1]:
+            if qbitList[int(numInLine[2])] == aLine[1]:
               writingFile.write('sdg q[' + numInLine[2] + '];\n')
             else:
               sys.exit('qbit name error')
@@ -101,7 +111,7 @@ for f in inDir:
         # T
         elif aLine[0] == 'q1:4':
           if len(numInLine) == 3:
-            if qbitList[numInLine[2]] == aLine[1]:
+            if qbitList[int(numInLine[2])] == aLine[1]:
               writingFile.write('t q[' + numInLine[2] + '];\n')
             else:
               sys.exit('qbit name error')
@@ -111,8 +121,48 @@ for f in inDir:
         # Tdg
         elif aLine[0] == 'q1:-4':
           if len(numInLine) == 3:
-            if qbitList[numInLine[2]] == aLine[1]:
+            if qbitList[int(numInLine[2])] == aLine[1]:
               writingFile.write('tdg q[' + numInLine[2] + '];\n')
+            else:
+              sys.exit('qbit name error')
+          else:
+            sys.exit('qbit name error')
+
+        # Rotation-X 1
+        elif aLine[0] == 'rx_pi_2':
+          if len(numInLine) == 2:
+            if qbitList[int(numInLine[1])] == aLine[1]:
+              writingFile.write('rx(pi/2) q[' + numInLine[1] + '];\n')
+            else:
+              sys.exit('qbit name error')
+          else:
+            sys.exit('qbit name error')
+
+        # Rotation-X 2
+        elif aLine[0] == 'rx1:2':
+          if len(numInLine) == 3:
+            if qbitList[int(numInLine[2])] == aLine[1]:
+              writingFile.write('rx(pi/2) q[' + numInLine[2] + '];\n')
+            else:
+              sys.exit('qbit name error')
+          else:
+            sys.exit('qbit name error')
+
+        # Rotation-Y 1
+        elif aLine[0] == 'ry_pi_2':
+          if len(numInLine) == 2:
+            if qbitList[int(numInLine[1])] == aLine[1]:
+              writingFile.write('ry(pi/2) q[' + numInLine[1] + '];\n')
+            else:
+              sys.exit('qbit name error')
+          else:
+            sys.exit('qbit name error')
+
+        # Rotation-Y 2
+        elif aLine[0] == 'ry1:2':
+          if len(numInLine) == 3:
+            if qbitList[int(numInLine[2])] == aLine[1]:
+              writingFile.write('ry(pi/2) q[' + numInLine[2] + '];\n')
             else:
               sys.exit('qbit name error')
           else:
@@ -121,7 +171,7 @@ for f in inDir:
         # C-NOT
         elif aLine[0] == 't2':
           if len(numInLine) == 3:
-            if qbitList[numInLine[1]] == aLine[1] and qbitList[numInLine[2]] == aLine[2]:
+            if qbitList[int(numInLine[1])] == aLine[1] and qbitList[int(numInLine[2])] == aLine[2]:
               writingFile.write('cx q[' + numInLine[1] + '],q[' + numInLine[2] + '];\n')
             else:
               sys.exit('qbit name error')
@@ -131,9 +181,33 @@ for f in inDir:
         # C-Phase
         elif aLine[0] == 'z2':
           if len(numInLine) == 3:
-            if qbitList[numInLine[1]] == aLine[1] and qbitList[numInLine[2]] == aLine[2]:
+            if qbitList[int(numInLine[1])] == aLine[1] and qbitList[int(numInLine[2])] == aLine[2]:
               writingFile.write('cz q[' + numInLine[1] + '],q[' + numInLine[2] + '];\n')
             else:
               sys.exit('qbit name error')
           else:
             sys.exit('qbit name error')
+
+        # Toffoli
+        elif aLine[0] == 't3':
+          if len(numInLine) == 3:
+            if qbitList[int(numInLine[1])] == aLine[1] and qbitList[int(numInLine[2])] == aLine[2] and qbitList[int(numInLine[3])] == aLine [3]:
+              writingFile.write('ccx q[' + numInLine[1] + '],q[' + numInLine[2] + '],q[' + numInLine[3] + '];\n')
+            else:
+              sys.exit('qbit name error')
+          else:
+            sys.exit('qbit name error')
+
+        # Fredkin a.k.a. C-swap
+        elif aLine[0] == 'f3':
+          if len(numInLine) == 3:
+            if qbitList[int(numInLine[1])] == aLine[1] and qbitList[int(numInLine[2])] == aLine[2] and qbitList[int(numInLine[3])] == aLine [3]:
+              writingFile.write('cswap q[' + numInLine[1] + '],q[' + numInLine[2] + '],q[' + numInLine[3] + '];\n')
+            else:
+              sys.exit('qbit name error')
+          else:
+            sys.exit('qbit name error')
+
+        else:
+            sys.exit(aLine[0] + ' not supported')
+
