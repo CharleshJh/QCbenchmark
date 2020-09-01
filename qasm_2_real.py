@@ -23,7 +23,7 @@ for f in inDir:
     splitPath[tmpNum - 1] = 'out'
     path = '/'.join(splitPath)
     path = path.replace('.qasm', '.real')
-    
+
     with open(path, 'w') as writingFile:
       for fl in range(len(fileLines)):
         aLine = fileLines[fl].split()

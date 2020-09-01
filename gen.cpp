@@ -2,7 +2,7 @@
   File       [gen.cpp]
   Synopsis   [Entanglement & some QFT]
   Author     [Chilsan Zhang]
-  Modify     [2020/08/28]
+  Modify     [2020/09/01]
   Note       [The clifford QFT part is generated from "sqct" project]
  **************************************************************************/
 
@@ -396,10 +396,11 @@ struct bigint {
 
 void help_message() {
   cout << "usage: generator_name [ -E | -fQ | -rQ ] [ int number ] <output_file>" << endl
-    << "-E  means entangle" << endl
-    << "-fQ means fake     QFT" << endl
-    << "-rQ means real     QFT" << endl
-    << "-cQ means clifford QFT" << endl;
+    << "-E   means entangle" << endl
+    << "-fQ  means fake     QFT" << endl
+    << "-rQ  means real     QFT" << endl
+    << "-cQ  means clifford QFT" << endl
+    << "-HcQ means H+cliff  QFT" << endl;
 }
 
 bool myStr2Int(const string& str, int& num) {
@@ -506,6 +507,7 @@ void genFile(const int& qbits, const int& format, const string& fileName) {
     }
   }
 
+  // cliff QFT
   else if (format == 3) {
     for (int i = 0; i < qbits; ++i) {
       file << "h1 q" << i << endl;
@@ -515,6 +517,19 @@ void genFile(const int& qbits, const int& format, const string& fileName) {
         approInv100(j + 1, i, file);
         file << "x2 q" << (i + j) << " q" << i << endl;
         appro100(j + 1, i, file);
+      }
+    }
+  }
+
+  // real QFT + H
+  else if (format == 4) {
+    for (int i = 0; i < qbits; ++i) {
+      file << "h1 q" << i << endl;
+    }
+    for (int i = 0; i < qbits; ++i) {
+      file << "h1 q" << i << endl;
+      for (int j = 1, k = (qbits - i); j < k; ++j) {
+        file << "q2:" << (bigint(2)^bigint(j)) << " q" << (i + j) << " q" << i << endl;
       }
     }
   }
@@ -557,6 +572,9 @@ int main(int argc, char* argv[]) {
       return 0;
     }
     genFile(qbits, 3, argv[3]);
+  }
+  else if (strcmp(argv[1], "-HcQ") == 0) {
+    genFile(qbits, 4, argv[3]);
   }
   else
     cout << "Maybe command typo" << endl;
