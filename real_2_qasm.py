@@ -190,8 +190,8 @@ for fname in inDir:
 
         # Toffoli
         elif aLine[0] == 't3':
-          if len(numInLine) == 3:
-            if qbitList[int(numInLine[1])] == aLine[1] and qbitList[int(numInLine[2])] == aLine[2] and qbitList[int(numInLine[3])] == aLine [3]:
+          if len(numInLine) == 4:
+            if qbitList[int(numInLine[1])] == aLine[1] and qbitList[int(numInLine[2])] == aLine[2] and qbitList[int(numInLine[3])] == aLine[3]:
               writingFile.write('ccx q[' + numInLine[1] + '],q[' + numInLine[2] + '],q[' + numInLine[3] + '];\n')
             else:
               sys.exit('qbit name error')
@@ -200,8 +200,8 @@ for fname in inDir:
 
         # Fredkin a.k.a. C-swap
         elif aLine[0] == 'f3':
-          if len(numInLine) == 3:
-            if qbitList[int(numInLine[1])] == aLine[1] and qbitList[int(numInLine[2])] == aLine[2] and qbitList[int(numInLine[3])] == aLine [3]:
+          if len(numInLine) == 4:
+            if qbitList[int(numInLine[1])] == aLine[1] and qbitList[int(numInLine[2])] == aLine[2] and qbitList[int(numInLine[3])] == aLine[3]:
               writingFile.write('cswap q[' + numInLine[1] + '],q[' + numInLine[2] + '],q[' + numInLine[3] + '];\n')
             else:
               sys.exit('qbit name error')
