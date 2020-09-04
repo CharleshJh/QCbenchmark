@@ -51,6 +51,6 @@ for f in inDir:
 
           writingFile.write('begin\n')
 
-        elif aLine[0] == 'h' or :aLine[0] == 'y' or aLine[0] == 'z' or aLine[0] == 'h'
+        elif aLine[0] == 'h' or aLine[0] == 'y' or aLine[0] == 'z' or aLine[0] == 'h':
           writingFile.write()
 
