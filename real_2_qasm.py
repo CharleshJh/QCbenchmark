@@ -30,7 +30,7 @@ for fname in inDir:
     splitPath[tmpNum - 1] = 'out'
     path = '/'.join(splitPath)
     path = path.replace('.real', '.qasm')
-    
+
     with open(path, 'w') as writingFile:
       writingFile.write('OPENQASM 2.0;\n')
       writingFile.write('include "qelib1.inc";\n')
@@ -40,12 +40,14 @@ for fname in inDir:
 
         if aLine[0] == '.numvars':
           writingFile.write('qreg q[' + str(numInLine[0]) + '];\n')
+          writingFile.write('creg c[' + str(numInLine[0]) + '];\n')
+          numOfQbit = int(numInLine[0])
 
         elif aLine[0] == '.variables':
           qbitList = aLine
           del qbitList[0]
 
-        elif aLine[0] == '.version' or aLine[0] == '.constants' or aLine[0] == '.garbage' or aLine[0] == '.begin' or aLine[0] == '.end':
+        elif aLine[0] == '.version' or aLine[0] == '.constants' or aLine[0] == '.garbage' or aLine[0] == '.begin':
           continue
 
         # Hadamard
@@ -207,6 +209,11 @@ for fname in inDir:
               sys.exit('qbit name error')
           else:
             sys.exit('qbit name error')
+
+        # measure
+        elif aLine[0] == '.end':
+          for i in range(numOfQbit):
+            writingFile.write('measure q[' + str(i) + '] -> c[' + str(i) + '];\n')
 
         else:
             sys.exit(aLine[0] + ' not supported')
