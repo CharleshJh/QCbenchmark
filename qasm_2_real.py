@@ -12,10 +12,11 @@ os.chdir('..')
 
 inDir = listdir(mypath)
 
-for f in inDir:
-  target = join(mypath, f)
+for fname in inDir:
+  target = join(mypath, fname)
 
   if isfile(target):
+    f = open(target, 'r', encoding = 'unicode_escape')
     fileLines = f.readlines()
     splitPath = f.name.split('/')
     tmpNum = len(splitPath)
@@ -35,22 +36,21 @@ for f in inDir:
           writingFile.write('.numvars ' + str(numInLine) + '\n')
 
           writingFile.write('.variables')
-          for i in range(numInLine):
+          for i in numInLine:
             writingFile.write(' q' + str(i))
           writingFile.write('\n')
 
           writingFile.write('.constants ')
-          for i in range(numInLine):
+          for i in numInLine:
             writingFile.write('0')
           writingFile.write('\n')
 
           writingFile.write('.garbage ')
-          for i in range(numInLine):
+          for i in numInLine:
             writingFile.write('-')
           writingFile.write('\n')
 
           writingFile.write('begin\n')
 
-        elif aLine[0] == 'h' or :aLine[0] == 'y' or aLine[0] == 'z' or aLine[0] == 'h'
+        elif aLine[0] == 'h' or aLine[0] == 'y' or aLine[0] == 'z' or aLine[0] == 'h':
           writingFile.write()
-
