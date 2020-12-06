@@ -33,24 +33,40 @@ for fname in inDir:
           writingFile.write('.version 1.0\n')
 
           numInLine = re.findall('[0-9]+', aLine[1])
-          writingFile.write('.numvars ' + str(numInLine) + '\n')
+          writingFile.write('.numvars ' + numInLine[0] + '\n')
 
           writingFile.write('.variables')
-          for i in numInLine:
+          for i in range(int(numInLine[0])):
             writingFile.write(' q' + str(i))
           writingFile.write('\n')
 
           writingFile.write('.constants ')
-          for i in numInLine:
+          for i in range(int(numInLine[0])):
             writingFile.write('0')
           writingFile.write('\n')
 
           writingFile.write('.garbage ')
-          for i in numInLine:
+          for i in range(int(numInLine[0])):
             writingFile.write('-')
           writingFile.write('\n')
 
-          writingFile.write('begin\n')
+          writingFile.write('.begin\n')
 
-        elif aLine[0] == 'h' or aLine[0] == 'y' or aLine[0] == 'z' or aLine[0] == 'h':
-          writingFile.write()
+        elif (aLine[0][0] == '/' and aLine[0][1] == '/') or aLine[0] == 'OPENQASM' or aLine[0] == 'include' or aLine[0] == 'creg' or aLine[0] == 'barrier':
+          continue;
+
+        elif aLine[0] == 'x' or aLine[0] == 'y' or aLine[0] == 'z' or aLine[0] == 'h':
+          numInLine = re.findall('[0-9]+', aLine[1])
+          writingFile.write(aLine[0] + '1 q' + numInLine[0] + '\n')
+
+        elif aLine[0] == 'cx':
+          numInLine = re.findall('[0-9]+', aLine[1])
+          writingFile.write('t2 q' + numInLine[0] + ' q' + numInLine[1] + '\n')
+
+        elif aLine[0] == 'measure':
+          writingFile.write('.end')
+          writingFile.close()
+          break;
+
+        else:
+          sys.exit(aLine[0] + ' not supported')

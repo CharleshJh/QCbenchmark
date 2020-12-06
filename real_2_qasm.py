@@ -214,6 +214,7 @@ for fname in inDir:
         elif aLine[0] == '.end':
           for i in range(numOfQbit):
             writingFile.write('measure q[' + str(i) + '] -> c[' + str(i) + '];\n')
+          writingFile.close()
 
         else:
             sys.exit(aLine[0] + ' not supported')
