@@ -4,6 +4,12 @@ Some quantum circuit in {X, Y, Z, H, S, S\*, T, T\*, CNOT, Toffoli}
 
 -
 
+The files in /GRCS have taken from
+
+https://github.com/sboixo/GRCS
+
+-
+
 The files in /qasm have been taken from
 
 https://github.com/iic-jku/ibm_qx_mapping
