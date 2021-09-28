@@ -40,3 +40,8 @@ The files in /Representative are used in papers like:
 
 
 And the files in /Representative_qasm are those files in /Representative transform general Toffoli into CCX
+
+-
+
+IBM 2018 QISKit Developer Challenge, which have been wildly used in evaluating qubit mapping algorithms
+https://github.com/iic-jku/qmap/tree/master/examples
