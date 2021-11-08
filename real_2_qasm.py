@@ -112,7 +112,7 @@ for fname in inDir:
 
         # T
         elif aLine[0] == 'q1:4':
-          if len(aLine) == 3:
+          if len(aLine) == 2:
             if qbitList[int(str(qbitList[aLine[2]]))] == aLine[1]:
               writingFile.write('t q[' + str(qbitList[aLine[2]]) + '];\n')
             else:
@@ -122,7 +122,7 @@ for fname in inDir:
 
         # Tdg
         elif aLine[0] == 'q1:-4':
-          if len(aLine) == 3:
+          if len(aLine) == 2:
             if qbitList[int(str(qbitList[aLine[2]]))] == aLine[1]:
               writingFile.write('tdg q[' + str(qbitList[aLine[2]]) + '];\n')
             else:
