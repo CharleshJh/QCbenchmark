@@ -7,6 +7,7 @@ Modify     [2022/01/03]
 
 """
 Usage: python3 real_2_qasm.py <real folder> 
+The result folder is at `<real folder>/out`
 """
 import sys
 import os
@@ -14,8 +15,22 @@ from os import listdir
 from os.path import isfile, isdir, join
 import re
 
-mypath = sys.argv[1]
-os.chdir(mypath)
+def writeSingleQubitGate(qbitList, line, writingFile, gate):
+  if len(line) == 2:
+    if qbitList.get(line[1]) != 'None':
+      writingFile.write(gate)
+      writingFile.write(' q[' + str(qbitList[line[1]]) + '];\n')
+    else:
+      sys.exit('qbit name error')
+  else:
+    sys.exit('qbit name error')
+
+try:
+  mypath = sys.argv[1]
+  os.chdir(mypath)
+except:
+  print("Please specify a correct absolute path!")
+
 if not os.path.exists('out'):
     os.mkdir('out')
 os.chdir('..')
@@ -50,125 +65,46 @@ for fname in inDir:
             qbitList[aLine[i]] = i-1
         elif aLine[0] == '.version' or aLine[0] == '.constants' or aLine[0] == '.garbage' or aLine[0] == '.begin':
           continue
+
         # Hadamard
         elif aLine[0] == 'h1':
-          if len(aLine) == 2:
-            if qbitList.get(aLine[1]) != 'None':
-              writingFile.write('h q[' + str(qbitList[aLine[1]]) + '];\n')
-            else:
-              sys.exit('qbit name error')
-          else:
-            sys.exit('qbit name error')
+          writeSingleQubitGate(qbitList, aLine, writingFile, 'h')
 
         # X
         elif aLine[0] == 't1':
-          if len(aLine) == 2:
-            if qbitList.get(aLine[1]) != 'None':
-              writingFile.write('x q[' + str(qbitList[aLine[1]]) + '];\n')
-            else:
-              sys.exit('qbit name error')
-          else:
-            sys.exit('qbit name error')
+          writeSingleQubitGate(qbitList, aLine, writingFile, 'x')
 
         # Y
         elif aLine[0] == 'y1':
-          if len(aLine) == 2:
-            if qbitList.get(aLine[1]) != 'None':
-              writingFile.write('y q[' + str(qbitList[aLine[1]]) + '];\n')
-            else:
-              sys.exit('qbit name error')
-          else:
-            sys.exit('qbit name error')
+          writeSingleQubitGate(qbitList, aLine, writingFile, 'y')
 
         # Z
         elif aLine[0] == 'z1':
-          if len(aLine) == 2:
-            if qbitList.get(aLine[1]) != 'None':
-              writingFile.write('z q[' + str(qbitList[aLine[1]]) + '];\n')
-            else:
-              sys.exit('qbit name error')
-          else:
-            sys.exit('qbit name error')
+          writeSingleQubitGate(qbitList, aLine, writingFile, 'z')
 
         # S
         elif aLine[0] == 's1':
-          if len(aLine) == 2:
-            if qbitList.get(aLine[1]) != 'None':
-              writingFile.write('s q[' + str(qbitList[aLine[1]]) + '];\n')
-            else:
-              sys.exit('qbit name error')
-          else:
-            sys.exit('qbit name error')
+          writeSingleQubitGate(qbitList, aLine, writingFile, 's')
 
         # Sdg
         elif aLine[0] == 'q1:-2':
-          if len(aLine) == 3:
-            if qbitList[int(str(qbitList[aLine[2]]))] == aLine[1]:
-              writingFile.write('sdg q[' + str(qbitList[aLine[2]]) + '];\n')
-            else:
-              sys.exit('qbit name error')
-          else:
-            sys.exit('qbit name error')
+          writeSingleQubitGate(qbitList, aLine, writingFile, 'sdg')
 
         # T
         elif aLine[0] == 'q1:4':
-          if len(aLine) == 2:
-            if qbitList[int(str(qbitList[aLine[2]]))] == aLine[1]:
-              writingFile.write('t q[' + str(qbitList[aLine[2]]) + '];\n')
-            else:
-              sys.exit('qbit name error')
-          else:
-            sys.exit('qbit name error')
+          writeSingleQubitGate(qbitList, aLine, writingFile, 't')
 
         # Tdg
         elif aLine[0] == 'q1:-4':
-          if len(aLine) == 2:
-            if qbitList[int(str(qbitList[aLine[2]]))] == aLine[1]:
-              writingFile.write('tdg q[' + str(qbitList[aLine[2]]) + '];\n')
-            else:
-              sys.exit('qbit name error')
-          else:
-            sys.exit('qbit name error')
+          writeSingleQubitGate(qbitList, aLine, writingFile, 'tdg')
 
-        # Rotation-X 1
-        elif aLine[0] == 'rx_pi_2':
-          if len(aLine) == 2:
-            if qbitList.get(aLine[1]) != 'None':
-              writingFile.write('rx(pi/2) q[' + str(qbitList[aLine[1]]) + '];\n')
-            else:
-              sys.exit('qbit name error')
-          else:
-            sys.exit('qbit name error')
+        # Rotation-X
+        elif aLine[0] == 'rx_pi_2' or aLine[0] == 'rx1:2':
+          writeSingleQubitGate(qbitList, aLine, writingFile, 'rx(pi/2)')
 
-        # Rotation-X 2
-        elif aLine[0] == 'rx1:2':
-          if len(aLine) == 3:
-            if qbitList[int(str(qbitList[aLine[2]]))] == aLine[1]:
-              writingFile.write('rx(pi/2) q[' + str(qbitList[aLine[2]]) + '];\n')
-            else:
-              sys.exit('qbit name error')
-          else:
-            sys.exit('qbit name error')
-
-        # Rotation-Y 1
-        elif aLine[0] == 'ry_pi_2':
-          if len(aLine) == 2:
-            if qbitList.get(aLine[1]) != 'None':
-              writingFile.write('ry(pi/2) q[' + str(qbitList[aLine[1]]) + '];\n')
-            else:
-              sys.exit('qbit name error')
-          else:
-            sys.exit('qbit name error')
-
-        # Rotation-Y 2
-        elif aLine[0] == 'ry1:2':
-          if len(aLine) == 3:
-            if qbitList[int(str(qbitList[aLine[2]]))] == aLine[1]:
-              writingFile.write('ry(pi/2) q[' + str(qbitList[aLine[2]]) + '];\n')
-            else:
-              sys.exit('qbit name error')
-          else:
-            sys.exit('qbit name error')
+        # Rotation-Y
+        elif aLine[0] == 'ry_pi_2' or aLine[0] == 'ry1:2':
+          writeSingleQubitGate(qbitList, aLine, writingFile, 'ry(pi/2)')
 
         # C-NOT
         elif aLine[0] == 't2':
@@ -224,7 +160,7 @@ for fname in inDir:
               if i != qbitLength:
                 writingFile.write('],q[')
               else:
-            sys.exit('qbit name error')
+                writingFile.write('];\n')
 
         # measure
         elif aLine[0] == '.end':
