@@ -47,7 +47,7 @@ for fname in inDir:
           numOfQbit = int(len(aLine))
         elif aLine[0] == '.variables':
           for i in range(1, len(aLine)):
-            qbitList[aLine[i]] = i
+            qbitList[aLine[i]] = i-1
         elif aLine[0] == '.version' or aLine[0] == '.constants' or aLine[0] == '.garbage' or aLine[0] == '.begin':
           continue
         # Hadamard
