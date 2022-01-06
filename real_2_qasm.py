@@ -50,12 +50,15 @@ for fname in inDir:
     path = '/'.join(splitPath)
     path = path.replace('.real', '.qasm')
 
+    print(target)
     with open(path, 'w') as writingFile:
       writingFile.write('OPENQASM 2.0;\n')
       writingFile.write('include "qelib1.inc";\n')
       qbitList = {}
       for fl in range(len(fileLines)):
         aLine = fileLines[fl].split()
+        if len(aLine) == 0:
+          continue
         if aLine[0] == '.numvars':
           writingFile.write('qreg q[' + aLine[1] + '];\n')
           writingFile.write('creg c[' + aLine[1] + '];\n')
@@ -136,7 +139,12 @@ for fname in inDir:
             for i in range(1, qbitLength+1):
               if qbitList.get(aLine[i]) == 'None':
                 sys.exit('qbit name error')
-            writingFile.write('ccx q[')
+            # TODO: change to 'ctrl @ x q[' for openQASM 3.0
+            if (qbitLength == 3):
+              writingFile.write('ccx q[')
+            else:
+              writingFile.write('mcx q[')
+
             for i in range(1, qbitLength+1):
               writingFile.write(str(qbitList[aLine[i]]))
               if i != qbitLength:
